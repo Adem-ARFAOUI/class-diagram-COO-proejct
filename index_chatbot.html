@@ -35,7 +35,7 @@
             // === Fonction pour récupérer les stats depuis le serveur ===
             async function getStats() {
                 try {
-                    const res = await fetch("http://localhost:3000/api/stats");
+                    const res = await fetch("https://class-diagram-coo-proejct.onrender.com/api/stats");
                     if (!res.ok) throw new Error("Erreur serveur");
                     const data = await res.json();
                     return data;
@@ -96,6 +96,7 @@
         </script>
 
 </body>
+
 
 
 </html>
