@@ -285,7 +285,7 @@ validateBtn.addEventListener("click", () => {
   if (!studentName) {
     alert("Veuillez entrer votre nom !");
   } else {
-    fetch("http://localhost:3000/submit-score", {
+    fetch("https://class-diagram-coo-proejct.onrender.com/submit-score", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -323,3 +323,4 @@ function reset() {
   localStorage.removeItem("validated");
   location.reload();
 }
+
