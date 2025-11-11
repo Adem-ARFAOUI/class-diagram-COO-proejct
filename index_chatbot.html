@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot Statistiques</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body
+    class="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 min-h-screen flex items-center justify-center p-4">
+
+    <div class="chatbot bg-white shadow-2xl rounded-2xl w-full max-w-md flex flex-col overflow-hidden">
+
+        <h1 class="text-xl sm:text-2xl font-bold text-center text-indigo-600 bg-gray-100 py-4 border-b">
+            Chatbot Statistiques du Quiz OO
+        </h1>
+
+
+        <div id="chat-area" class="flex-1 p-4 overflow-y-auto space-y-3 text-sm sm:text-base">
+            <!-- Les messages viendront ici dynamiquement -->
+        </div>
+
+        <!-- Zone d'entrée -->
+        <div class="flex items-center gap-2 p-4 border-t bg-gray-50">
+            <input type="text" id="user-input" placeholder="Posez une question... (ex: pourcentage, moyenne)"
+                class="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base">
+            <button onclick="envoyer()"
+                class="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 active:scale-95 transition-transform">
+                Envoyer
+            </button>
+        </div>
+
+        <script>
+            // === Fonction pour récupérer les stats depuis le serveur ===
+            async function getStats() {
+                try {
+                    const res = await fetch("http://localhost:3000/api/stats");
+                    if (!res.ok) throw new Error("Erreur serveur");
+                    const data = await res.json();
+                    return data;
+                } catch (err) {
+                    console.error(err);
+                    return { message: "Impossible de récupérer les statistiques." };
+                }
+            }
+
+            // === Fonction chatbot ===
+            async function chatbot(question) {
+                const stats = await getStats();
+
+                if (stats.message) return stats.message;
+
+                question = question.toLowerCase();
+
+                if (question.includes("pourcentage")) {
+                    return `${stats.pourcentageCompris}% des étudiants ont compris le cours (score > 6).`;
+                } else if (question.includes("moyenne")) {
+                    return `La moyenne générale est de ${stats.moyenne} sur 10.`;
+                } else if (question.includes("combien")) {
+                    return `${stats.total} étudiants ont participé au quiz.`;
+                } else if (question.includes("top 10")) {
+                    if (!stats.top10 || stats.top10.length === 0) return "Aucun score enregistré.";
+                    let topList = stats.top10.map((s, i) => `${i + 1}. ${s.name} → ${s.score}`).join("\n");
+                    return `Top 10 des meilleurs scores :\n${topList}`;
+                } else if (question.includes("plus de 6")) {
+                    return `${stats.countPlus6} étudiants ont obtenu un score supérieur à 6.`;
+                } else {
+                    return "Je peux répondre sur 'pourcentage', 'moyenne', 'combien', 'top 10', ou 'plus de 6'.";
+                }
+            }
+
+            // === Fonction pour envoyer la question ===
+            async function envoyer() {
+                const input = document.getElementById("user-input").value.trim();
+                if (!input) return;
+
+                const chatArea = document.getElementById("chat-area");
+                chatArea.innerHTML += `<p class="user"><b>Vous :</b> ${input}</p>`;
+
+                const reponse = await chatbot(input);
+                chatArea.innerHTML += `<p class="bot"><b>Bot :</b> ${reponse}</p>`;
+
+                document.getElementById("user-input").value = "";
+                chatArea.scrollTop = chatArea.scrollHeight;
+            }
+
+            // === Événement sur le bouton ===
+            document.getElementById("send-btn").addEventListener("click", envoyer);
+
+            // Optionnel : appuyer sur "Entrée" pour envoyer
+            document.getElementById("user-input").addEventListener("keypress", (e) => {
+                if (e.key === "Enter") envoyer();
+            });
+
+        </script>
+
+</body>
+
+
+</html>

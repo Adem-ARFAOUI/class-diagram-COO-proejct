@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice UML – Associations et Multiplicités</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1> Créez et validez vos relations UML : Diagramme de classe</h1>
+    <label style="font-weight: bold;">Votre Nom et Prénom :</label>
+    <input type="text" id="studentId" placeholder="EX: Adem Arfaoui A05 ^-^">
+    <p class="info" style="font-weight: bold;">Choisissez le type de relation ,Cliquez sur deux classes !</p>
+
+    <div class="controls">
+        <select id="relationType">
+            <option value="0..* to 0..*">0..* to 0..*</option>
+            <option value="0..* to 1">0..* to 1</option>
+            <option value="1..* to 1..*">1..* to 1..*</option>
+            <option value="1..* to 0..*">1..* to 0..*</option>
+            <option value="1..* to 1">1..* to 1</option>
+            <option value="1 to *">1 to *</option>
+            <option value="heritage">Héritage (▲)</option>
+        </select>
+    </div>
+
+    <div class="uml-container" id="uml-container">
+        <svg>
+            <defs>
+                <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"
+                    markerUnits="strokeWidth">
+                    <path d="M0,0 L0,6 L9,3 z" fill="#16a34a" />
+                </marker>
+            </defs>
+        </svg>
+
+        <!-- Classes -->
+        <div class="class-box" id="Assurance">
+            <div class="class-title">Assurance</div>
+            <div class="attributes">
+                -NumPolice : integer <br>
+                -Compagnie
+                -Durée : integer
+                <hr>
+                +contacterPolice() <br>
+                +définirOptions() <br>
+                +payer()
+            </div>
+        </div>
+
+        <div class="class-box" id="Vante">
+            <div class="class-title">Vante</div>
+            <div class="attributes">
+                -prix : integer <br>
+                -date : date
+                <hr>
+                +payer()
+            </div>
+        </div>
+
+        <div class="class-box" id="Vehicule">
+            <div class="class-title">Véhicule</div>
+            <div class="attributes">
+                -modele <br>
+                -annee : date <br>
+                -cylindree : integer <br>
+                -carburant : boleean
+            </div>
+        </div>
+
+        <div class="class-box" id="Reparation">
+            <div class="class-title">Reparation</div>
+            <div class="attributes">
+                -dateEntree : date <br>
+                -dateSortie : date
+                <hr>
+                +consulter() <br>
+                +facture() <br>
+                +definirDevis() <br>
+                +determinerTravaux()
+            </div>
+        </div>
+
+        <div class="class-box" id="Garentie">
+            <div class="class-title">Garentie</div>
+            <div class="attributes">
+                -numGarentie : integer <br>
+                -duree : integer <br>
+                -dateDebut : date
+                <hr>
+                +souscrire() <br>
+                +etendre()
+            </div>
+        </div>
+
+        <div class="class-box" id="Client">
+            <div class="class-title">Client</div>
+            <div class="attributes">
+                -nom <br>
+                -addresse
+                <hr>
+                +enregister()
+            </div>
+        </div>
+        <div class="class-box" id="Facture">
+            <div class="class-title">Facture</div>
+            <div class="attributes">
+                -dateEmission : date
+                <hr>
+                +emettre()
+            </div>
+        </div>
+        <div class="class-box" id="ChefAtelier">
+            <div class="class-title">ChefAtelier</div>
+            <div class="attributes">
+                +assignerReparation()
+            </div>
+        </div>
+        <div class="class-box" id="PersPhysique">
+            <div class="class-title">PersPhysique</div>
+            <div class="attributes">
+                -prenom
+            </div>
+        </div>
+        <div class="class-box" id="persMorale">
+            <div class="class-title">persMorale</div>
+            <div class="attributes">
+                -numTVA : integer <br>
+                -raisonSociale
+            </div>
+        </div>
+    </div>
+    <p id="result"></p>
+    <button id="validateRelations">Valider</button>
+    <script src="script.js"></script>
+    <!-- <button id="reset" onclick="return reset()">Réinitialiser LocalStorage</button> -->
+
+</body>
+
+</html>

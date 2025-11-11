@@ -1,0 +1,328 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+  margin: 0;
+  padding: 10px;
+  overflow-x: hidden;
+}
+
+h1 {
+  text-align: center;
+  color: #2563eb;
+}
+
+.info {
+  text-align: center;
+  color: #555;
+}
+
+.controls {
+  text-align: center;
+  margin: 10px 0;
+}
+
+select,
+button {
+  margin: 5px;
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 200px;
+  font-size: larger;
+  font-weight: bold;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1e40af;
+}
+
+#result {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.correct {
+  color: green;
+}
+
+.wrong {
+  color: red;
+}
+
+/* Conteneur général qui va se réduire */
+.scale-wrapper {
+  transform-origin: top left;
+  transition: transform 0.3s ease;
+}
+
+.uml-container {
+  position: relative;
+  width: 100%;
+  height: 900px;
+  background: white;
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.class-box {
+  position: absolute;
+  z-index: 200;
+  width: 200px;
+  background: #fff;
+  border: 2px solid #2563eb;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.class-box.selected {
+  border-color: #16a34a;
+  box-shadow: 0 0 10px #16a34a;
+  transform: scale(1.03);
+}
+
+.class-title {
+  background: #2563eb;
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  font-size: 0.9vw;
+}
+
+.attributes {
+  font-size: 15px;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.relation {
+  stroke: #16a34a;
+  stroke-width: 2;
+  marker-end: url(#arrow);
+}
+
+#Assurance {
+  top: 50px;
+  left: 80px;
+}
+
+#Vante {
+  top: 250px;
+  left: 80px;
+}
+
+#Vehicule {
+  top: 250px;
+  left: 400px;
+}
+
+#Reparation {
+  top: 70px;
+  left: 700px;
+}
+
+#Garentie {
+  top: 320px;
+  left: 700px;
+}
+
+#Client {
+  top: 500px;
+  left: 400px;
+}
+
+input {
+  border-radius: 20px;
+  height: 20px;
+  border: solid 2px blue;
+  width: 300px;
+}
+#relationType {
+  border: solid 2px blue;
+}
+option {
+  font-weight: bold;
+}
+@media (max-width: 1000px) {
+  .scale-wrapper {
+    transform: scale(calc(0.8 * (100vw / 1000)));
+  }
+
+  .class-box {
+    width: 100px;
+  }
+
+  .attributes {
+    font-size: 10px;
+    text-align: left;
+    padding-left: 0px;
+  }
+
+  .class-title {
+    background: #2563eb;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 10px;
+  }
+
+  .uml-container {
+    width: 100%;
+  }
+
+  #Assurance {
+    top: 50px;
+    left: 10px;
+  }
+
+  #Vante {
+    top: 600px;
+    left: 30px;
+  }
+
+  #Vehicule {
+    top: 350px;
+    left: 150px;
+  }
+
+  #Reparation {
+    top: 60px;
+    left: 300px;
+  }
+
+  #Garentie {
+    top: 480px;
+    left: 560px;
+  }
+
+  #Client {
+    top: 600px;
+    left: 350px;
+  }
+
+  #Facture {
+    top: 100px;
+    left: 560px;
+  }
+
+  #ChefAtelier {
+    top: 300px;
+    left: 560px;
+  }
+
+  #PersPhysique {
+    top: 750px;
+    left: 500px;
+  }
+
+  #persMorale {
+    top: 750px;
+    left: 200px;
+  }
+}
+
+/* Responsive zoom global */
+@media (max-width: 480px) {
+  .scale-wrapper {
+    transform: scale(calc(0.8 * (100vw / 1000)));
+  }
+
+  .class-box {
+    width: 75px;
+  }
+
+  .attributes {
+    font-size: 8px;
+    text-align: left;
+    padding-left: 0px;
+  }
+
+  .class-title {
+    background: #2563eb;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 10px;
+  }
+
+  .uml-container {
+    width: 100%;
+  }
+
+  #Assurance {
+    top: 50px;
+    left: 10px;
+  }
+
+  #Vante {
+    top: 400px;
+    left: 30px;
+  }
+
+  #Vehicule {
+    top: 250px;
+    left: 50px;
+  }
+
+  #Reparation {
+    top: 100px;
+    left: 170px;
+  }
+
+  #Garentie {
+    top: 250px;
+    left: 250px;
+  }
+
+  #Client {
+    top: 400px;
+    left: 250px;
+  }
+
+  #Facture {
+    top: 30px;
+    left: 320px;
+  }
+
+  #ChefAtelier {
+    top: 150px;
+    left: 330px;
+  }
+
+  #PersPhysique {
+    top: 550px;
+    left: 300px;
+  }
+
+  #persMorale {
+    top: 550px;
+    left: 150px;
+  }
+}
